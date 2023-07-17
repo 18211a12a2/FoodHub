@@ -1,0 +1,46 @@
+.res_card{
+ padding: 10px;
+}
+
+.res_card:hover{
+    border-color: rgb(232, 232, 232);
+    box-shadow: rgba(28, 28, 28, 0.12) 0px 0.4rem 1.8rem;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.res_img{
+    padding: 5px;
+}
+
+.res_img img{
+    width: 350px;
+    height: 200px;
+    border-radius: 10px;
+}
+.res_name{
+    font-weight: bold;
+}
+.res_details{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.res_distance{}
+.res_deliveryTime{}
+.res_deliveryFee{}
+.res_footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.res_type{}
+.res_rating{
+    display: flex;
+    align-items: center;
+}
+
+.res_rating svg{
+    color: gold;
+    font-size: 20px;
+}

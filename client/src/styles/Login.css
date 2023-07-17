@@ -1,0 +1,62 @@
+.login{
+    background: linear-gradient(to right, #ff5f6d, #ffc371);
+    height: 100vh;
+    position: relative;
+}
+
+.login_comtainer{
+    background-color: white;
+    position: absolute;
+    width: 60%;
+    height: 500px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    background-image: url('../assets/images/food_bg.avif');   
+    border-radius: 30px;
+}
+
+#signInDiv{
+    padding: 20px;
+}
+
+.login_left{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login_left > h1{
+    color: white;
+    font-weight: 900;
+    font-size: 50px;
+    padding: 100px;
+    text-align: center;
+}
+
+.login_right{
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.login_label{
+    font-family: unset;
+    color: indigo;
+}
+
+.login_right_main{
+    width: 80%;
+    height: 450px;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+    border-color: rgb(232, 232, 232);
+    box-shadow: rgba(28, 28, 28, 0.12) 0px 0.4rem 1.8rem;
+    cursor: pointer;
+    border-radius: 10px;
+}

@@ -1,13 +1,20 @@
 import '../styles/Restaurants.css'
 import StarIcon from '@mui/icons-material/Star';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { restaurantMenuActions } from '../store/restaurantmenu-slice';
 
 const Restaurants = (props) => {
    const { restaurant } = props;
+  let dispatch = useDispatch();
+   function handleRestaurantData(){
+    dispatch(restaurantMenuActions.getRestaurantMenu(restaurant));
+    localStorage.setItem('res-menu', JSON.stringify(restaurant));
+   }
 
     return (
         <div className='Restaurants'>
-          <Link to='/restaurant' state={{data : restaurant}} style={{ textDecoration: 'none' }}> <div className='res_card'>
+          <Link to='/restaurant'onClick={handleRestaurantData} state={{data : restaurant}} style={{ textDecoration: 'none' }}> <div className='res_card'>
               <div className='res_img'>
                 <img src={restaurant.image} alt='Restaurant'></img>
               </div>

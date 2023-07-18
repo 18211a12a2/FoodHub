@@ -36,11 +36,7 @@ const restaurantCartSlice = createSlice({
         },
         removeFromCart(state, action){
             const itemId = action.payload;
-            // if(state.itemList[itemId].quantity>1){
-            //     state.itemList[itemId].quantity--;
-            // }else{
-                state.itemList = [...state.itemList].filter((item)=>item.itemId!==itemId)
-            // }
+            state.itemList = [...state.itemList].filter((item)=>item.itemId!==itemId)
         },
         setShowCart(state){
             state.showCart = true;

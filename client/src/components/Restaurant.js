@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import '../styles/Restaurant.css';
 import StarIcon from '@mui/icons-material/Star';
-import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartActions } from '../store/restaurantCart-slice';
 import CloseIcon from '@mui/icons-material/Close';
@@ -11,12 +10,15 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 
 function Restaurant(){
-    const location = useLocation();
-    const [restaurantMenu, setRestaurantMenu] = useState(location.state?.data);
-
     const [openDialog, handleDisplay] = useState(false);
 
     const dispatch = useDispatch();
+    let restaurantMenu = {}
+    useSelector((state)=>{
+        restaurantMenu = JSON.parse(localStorage.getItem('res-menu'));
+        return state.menu.restaurantMenu;
+    })
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);

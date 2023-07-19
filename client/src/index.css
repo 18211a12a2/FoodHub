@@ -18,7 +18,7 @@ body {
   }
 
   .css-1t1j96h-MuiPaper-root-MuiDialog-paper{
-    overflow-y: hidden  !important;
+    /* overflow-y: hidden  !important; */
     max-height: 600px;
     border-radius:20px !important;
   }

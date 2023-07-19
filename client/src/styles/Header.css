@@ -18,18 +18,23 @@
     margin: 0 auto;
 }
 
+.header_autoSuggest{
+    width: 50%;
+}
+
 .header_search{
     background-color: unset;
     box-shadow: unset;
     overflow: hidden;
     transition: transform 0.1s ease-in 0s;
-    padding: 8px;
     border: 0px;
-    width: 50%;
     appearance: none;
     display: flex;
     align-items: center;
-    position: relative;
+    /* position: relative; */
+    top: 5px;
+    position: fixed;
+    width: 40%;
 }
 
 .header_search input{
@@ -88,3 +93,48 @@
 .header_login{
     cursor: pointer;
 }
+
+/* iubnlwskaml */
+
+
+input {
+    border: 1px solid #999;
+    padding: 8px;
+    width: 300px;
+  }
+  .no-autocomplete {
+    color: #999;
+    padding: 8px;
+  }
+  .autocomplete {
+    border: 1px solid #999;
+    border-top-width: 0;
+    background-color: #f5f5f5;
+    position: fixed;
+    top: 60px;
+    width: 40%;
+  }
+
+  .ac_ul{
+    padding: 0;
+    border-top-width: 0;
+    list-style: none;
+    margin-top: 0;
+    max-height: 154px;
+    overflow-y: auto;
+    padding-left: 0;
+  }
+
+  .autocomplete li {
+    padding: 8px 8px 8px 30px;
+  }
+  .autocomplete > .active,
+  .autocomplete li:hover {
+    background-color: darkgray;
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .ac_li {
+    border-bottom: 1px solid #999;
+    color: black;
+  }

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import jwt_decode from 'jwt-decode'
 import { useDispatch } from "react-redux";
 import { authActions } from "../store/auth-slice";
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import '../styles/Login.css'
 
 
@@ -63,7 +63,7 @@ function Login(){
         <div className="login">
             <div className="login_comtainer">
                 <div className="login_left">
-                    <h1>Welcome to FoodHUB</h1>
+                    <Link to="/" style={{ textDecoration: 'none' }}><h1 className="login_welcomeLabel">Welcome to FoodHUB</h1></Link>
                 </div>
                 <div className="login_right">
                     <div className="login_right_main">

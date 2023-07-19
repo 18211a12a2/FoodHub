@@ -53,7 +53,7 @@ function Cart(){
                         {cartItems.length ? (<h2>Your Food Basket</h2>) : (<h2>Your Food Basket is empty</h2>)}
                         
                         <div className='checkout_container'>
-                            <p className='cart_price'>Total Price : {totalPrice.toFixed(2)}</p>
+                            <p className='cart_price'>Total Price : ${totalPrice.toFixed(2)}</p>
                             <Link to='/checkout'><button onClick={handleCheckout} className='checkout_btn'>Checkout</button></Link>
                         </div>
                     </div>

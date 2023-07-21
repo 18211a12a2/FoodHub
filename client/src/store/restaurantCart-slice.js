@@ -54,6 +54,9 @@ const restaurantCartSlice = createSlice({
             }else{
                 state.dailogData = action.payload;
             }
+        },
+        emptyCart(state){
+            state.itemList = [];
         }
     },
 });

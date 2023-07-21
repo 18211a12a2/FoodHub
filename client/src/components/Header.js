@@ -1,12 +1,13 @@
  import '../styles/Header.css'
  import SearchIcon from '@mui/icons-material/Search';
  import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
- import { Link } from 'react-router-dom'
+ import { Link, useNavigate } from 'react-router-dom'
  import { useDispatch, useSelector } from 'react-redux';
  import { authActions } from '../store/auth-slice';
  import { useState } from 'react';
  import restaurants from '../utils/restaurants';
 import { restaurantMenuActions } from '../store/restaurantmenu-slice';
+import { cartActions } from '../store/restaurantCart-slice';
 
  const Header = () =>{
     const [active, setActive] = useState(0);
@@ -27,12 +28,13 @@ import { restaurantMenuActions } from '../store/restaurantmenu-slice';
 
     let userData = useSelector((state)=>state.auth.userData);
     const suggestions  = restaurants;
+    const navigate = useNavigate();
     function userLogout(){
         const token = localStorage.getItem("JWT");
         dispatch(authActions.isLoggedIn(false));
         dispatch(authActions.userDetails({
-            family_name : "",
-            given_name : "Guest",
+            firstName : "Guest",
+            lastName : "",
             email : '',
             id:''
         }));
@@ -41,6 +43,8 @@ import { restaurantMenuActions } from '../store/restaurantmenu-slice';
             return Promise.resolve();
         });
         alert("Logout successful!!")
+        dispatch(cartActions.emptyCart())
+        navigate('/');
     }
 
     function onSelectSuggestion(e,restaurant){
@@ -104,7 +108,7 @@ import { restaurantMenuActions } from '../store/restaurantmenu-slice';
                 </div>
 
                 <div className="header_sidemenu">
-                    <div className="header_user"><span>Hello</span><h4>{userData.given_name} {userData.family_name}</h4></div>
+                    <div className="header_user"><span>Hello</span><h4>{userData.firstName} {userData.lastName}</h4></div>
                     {
                         isUserLoggedIn ? (<div onClick={userLogout} className="header_login">Logout</div>)
                         : (<Link to='/login' style={{ textDecoration: 'none' }}><div className="header_login">Login</div></Link>)

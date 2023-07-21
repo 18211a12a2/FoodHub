@@ -5,8 +5,8 @@ const authSlice = createSlice({
     initialState:{ 
         isLoggedIn : false,
         userData : {
-            family_name : "",
-            given_name : "Guest",
+            firstName : "Guest",
+            lastName : "",
             email : '',
             id:''
         }

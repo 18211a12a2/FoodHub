@@ -3,42 +3,123 @@ import jwt_decode from 'jwt-decode'
 import { useDispatch } from "react-redux";
 import { authActions } from "../store/auth-slice";
 import { Link, Navigate } from 'react-router-dom';
-import '../styles/Login.css'
+import '../styles/Login.css';
+import axios from 'axios';
 
 
 function Login(){
 
     const [user,setUser] = useState({});
+    const [isLogin, setLogin] = useState(true);
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     let dispatch = useDispatch();
-    const [token, setToken] = useState("");
+
+    function handleUserData(userObj,id){
+        console.log(userObj)
+        dispatch(authActions.isLoggedIn(true))
+        dispatch(authActions.userDetails({
+                firstName : userObj.firstName,
+                lastName : userObj.lastName,
+                email : userObj.email,
+                userId:userObj.userId
+        }))
+        setUser(userObj);
+        localStorage.setItem('JWT', JSON.stringify(userObj));
+    }
+
     async function handleCallBackResponse(res){
         console.log("Encoded JWT ID token : ",res.credential)
-        setToken(res.credential)
         let userObj = res.credential ? jwt_decode(res.credential) : null;
         console.log(userObj);
-
         if(userObj){
             const response = await fetch("http://localhost:8080/users",{
                 method:'POST',
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify({
-                    family_name : userObj.family_name,
-                    given_name : userObj.given_name,
+                    firstName : userObj.given_name,
+                    lastName : userObj.family_name,
                     email : userObj.email,
                 })
             })
             const data = await response.json();
             console.log("user reso ",data)
-            dispatch(authActions.isLoggedIn(true))
-            dispatch(authActions.userDetails({
-                    family_name : userObj.family_name,
-                    given_name : userObj.given_name,
+            if(data){
+                let userPayLoad = {
+                    firstName : userObj.given_name,
+                    lastName : userObj.family_name,
                     email : userObj.email,
                     userId:data._id
-            }))
-            setUser(userObj);
-            localStorage.setItem('JWT', JSON.stringify(res.credential));
+                }
+                handleUserData(userPayLoad);
+            }
         }
+    }
+
+    function login(e){
+        e.preventDefault();
+        console.log('login');
+        let loginData = {
+            email,
+            password
+        }
+        postUserdata(loginData,"login")
+    }
+
+    function signup(e){
+        e.preventDefault();
+        console.log('signup');
+        if(password !== confirmPassword) return alert("passwords doesn't match");
+        let registrationData = {
+            firstName,
+            lastName,
+            email,
+            password
+        }
+        postUserdata(registrationData,"register")
+    }
+
+    function postUserdata(payload,type){
+        axios.post(`http://localhost:8080/auth/${type}`, payload)
+        .then(response => {
+            if(type==='register'){
+                console.log('Registration done successfully', response.data);
+                alert("Registration done successfully");
+                setLogin(true);
+            }else{
+                console.log("Login Successful");
+                let userPayLoad = {
+                    firstName : response.data.user.firstName,
+                    lastName : response.data.user.lastName,
+                    email : response.data.user.email,
+                    userId:response.data.user._id
+                }
+                handleUserData(userPayLoad);
+            }
+        })
+        .catch(error => {
+            if(type==='register'){
+                alert(error.response.data.msg);
+                console.error('Error registering new user:', error.response);
+            }else{
+                alert(error.response.msg);
+                console.error('Error while logging in:', error.response);
+            }
+            
+        })
+    }
+
+    function goToSignup(){
+        setLogin(false);
+        console.log(isLogin)
+    }
+
+    function goToLogin(){
+        setLogin(true);
+        console.log(isLogin)
     }
 
     useEffect(()=>{
@@ -67,8 +148,36 @@ function Login(){
                 </div>
                 <div className="login_right">
                     <div className="login_right_main">
-                        <h1 className="login_label">Login</h1>
-                        <div id="signInDiv"></div>
+                        { isLogin ? (
+                            <div className="login_page">
+                                <form onSubmit={login}>
+                                    <h1 className="login_label">Login</h1>
+                                    <input className="m h" value={email} onChange={(e) => setEmail(e.target.value)} type="email" required placeholder="email"></input>
+                                    <input className="m h" value={password} onChange={(e) => setPassword(e.target.value)} type="password" required placeholder="password"></input>
+                                    <button className="login_btn btn_h" type="submit">Login</button>
+                                    <p className="have_an_acc">Don't have an account? <span onClick={goToSignup}>Signup</span></p>
+                                </form>
+                             </div>
+                        ) : (
+                        <div className="signup_page">
+                                <form onSubmit={signup}>
+                                    <h1 className="signup_label">Signup</h1>
+                                    <input className="m h" value={firstName} onChange={(e) => setFirstName(e.target.value)} type="text" required placeholder="first name"></input>
+                                    <input className="m h" value={lastName} onChange={(e) => setLastName(e.target.value)} type="text" required placeholder="last name"></input>
+                                    <input className="m h" value={email} onChange={(e) => setEmail(e.target.value)} type="email" required placeholder="email"></input>
+                                    <input className="m h" value={password} onChange={(e) => setPassword(e.target.value)} type="password" required placeholder="create password"></input>
+                                    <input className="m h" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} type="password" required placeholder="confirm password"></input>
+                                    <button className="login_btn btn_h" type="submit">Signup</button>
+                                    <p className="have_an_acc">Already have an account? <span onClick={goToLogin}>Login</span></p>
+                                </form>
+                        </div>
+                        )
+                    }
+                        <div>
+                            <p className="p_center">---------------- Or ----------------</p>
+                            <div id="signInDiv"></div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

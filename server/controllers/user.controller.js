@@ -17,14 +17,14 @@ const getUser = async (req,res)=> {
 
 const createUser = async (req,res)=> {
     try{
-        const { family_name, given_name, email } = req.body;
+        const { firstName, lastName, email } = req.body;
         const userExists = await User.findOne({email});
 
         if(userExists) return res.status(200).json(userExists);
 
         const newUser = await User.create({
-            family_name,
-            given_name,
+            firstName,
+            lastName,
             email
         })
         res.status(200).json(newUser);

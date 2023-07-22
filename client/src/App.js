@@ -7,6 +7,7 @@ import Login from './components/Login';
 import Restaurant from './components/Restaurant';
 import Cart from './components/Cart';
 import CheckOut from './components/Checkout';
+import CheckoutSuccess from './components/CheckoutSuccess';
 import { useDispatch } from 'react-redux';
 import { authActions } from './store/auth-slice';
 import axios from 'axios';
@@ -59,6 +60,7 @@ function App() {
         <Route path='/restaurant' element={<div><Header/><Restaurant/></div>}/>
         <Route path='/checkout' element={<div><Header/><CheckOut/></div>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/checkout-success' element={<div><Header/><CheckoutSuccess/></div>}/>
     </Routes>
   );
 }

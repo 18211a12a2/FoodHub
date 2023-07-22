@@ -5,6 +5,7 @@ import connectDB from "./mongodb/connect.js";
 import cartRouter from "./routes/cartItems.routes.js"
 import userRouter from "./routes/user.routes.js";
 import authRouter from "./routes/auth.routes.js";
+import stripe from "./routes/stripe.js";
 
 dotenv.config();
 
@@ -16,11 +17,13 @@ app.get('/',(req,res)=>{
     res.send({message:"hello !!"});
 })
 
-app.use('/users',userRouter)
+app.use('/users',userRouter);
 
 app.use('/cartItems', cartRouter);
 
-app.use('/auth', authRouter)
+app.use('/auth', authRouter);
+
+app.use('/stripe',stripe)
 
 const startServer = async ()=>{
     try{

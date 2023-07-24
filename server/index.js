@@ -6,6 +6,7 @@ import cartRouter from "./routes/cartItems.routes.js"
 import userRouter from "./routes/user.routes.js";
 import authRouter from "./routes/auth.routes.js";
 import stripe from "./routes/stripe.js";
+import ordersRouter from "./routes/orders.routes.js";
 
 dotenv.config();
 
@@ -23,7 +24,9 @@ app.use('/cartItems', cartRouter);
 
 app.use('/auth', authRouter);
 
-app.use('/stripe',stripe)
+app.use('/stripe',stripe);
+
+app.use('/orders',ordersRouter);
 
 const startServer = async ()=>{
     try{

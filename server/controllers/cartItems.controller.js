@@ -1,15 +1,17 @@
  import Cart from '../mongodb/models/cartItems.js';
 
 const getAllCartItems = async (req,res)=> {
-  try{
-    const userId = req.params.id;
-    const userExists = await Cart.findOne({userId});
-    if(userExists){
-     res.status(200).send(userExists.items)
-    }
-}catch(err){
-    res.status(500).json({message: err.message});
-}
+    try{
+      const userId = req.params.id;
+      const userExists = await Cart.findOne({userId});
+      if(userExists){
+        res.status(200).send(userExists.items)
+      }else{
+        res.status(200).send(null)
+      }
+  }catch(err){
+      res.status(500).json({message: err.message});
+  }
 };
 const insertCartItem = async (req,res)=> {
   try {
@@ -27,7 +29,20 @@ const insertCartItem = async (req,res)=> {
     }
 };
 const updateCartItem = async (req,res)=> {};
-const removeCartItem = async (req,res)=> {};
+const removeCartItem = async (req,res)=> {
+  try{
+    const userId = req.params.id;
+    const userExists = await Cart.findOne({userId});
+    if(userExists){
+      const result = await Cart.deleteMany({userId});
+      // res.status(200).send(userExists.items)
+      res.status(200).json({ message: 'All cart items have been deleted successfully.', cartItems : userExists });
+    }
+  } catch (err) {
+    console.error('Error deleting cart items:', err);
+    res.status(500).json({ message: 'An error occurred while deleting cart items.' });
+  }
+}
 
 export {
     getAllCartItems,

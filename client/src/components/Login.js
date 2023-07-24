@@ -105,7 +105,7 @@ function Login(){
                 alert(error.response.data.msg);
                 console.error('Error registering new user:', error.response);
             }else{
-                alert(error.response.msg);
+                alert(error.response.data.msg);
                 console.error('Error while logging in:', error.response);
             }
             

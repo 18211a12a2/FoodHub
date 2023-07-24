@@ -1,0 +1,30 @@
+.checkoutSuccess{
+    width: 100%;
+    height: 100vh;
+    /* background-color: aqua; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cs_container{
+    border: 1px solid;
+    width: 25%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-color: rgb(232, 232, 232);
+    box-shadow: rgba(28, 28, 28, 0.12) 0px 0.4rem 1.8rem;
+}
+
+.cs_container svg{
+    font-size: 110px;
+    color: lawngreen;
+}
+
+.cs_homepage{
+    color: #1a8ae3;
+}
+

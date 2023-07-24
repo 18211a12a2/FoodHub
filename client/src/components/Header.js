@@ -1,16 +1,18 @@
- import '../styles/Header.css'
- import SearchIcon from '@mui/icons-material/Search';
- import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
- import { Link, useNavigate } from 'react-router-dom'
- import { useDispatch, useSelector } from 'react-redux';
- import { authActions } from '../store/auth-slice';
- import { useState } from 'react';
- import restaurants from '../utils/restaurants';
+import '../styles/Header.css'
+import SearchIcon from '@mui/icons-material/Search';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { authActions } from '../store/auth-slice';
+import { useEffect, useState } from 'react';
+import restaurants from '../utils/restaurants';
 import { restaurantMenuActions } from '../store/restaurantmenu-slice';
 import { cartActions } from '../store/restaurantCart-slice';
+import axios from 'axios';
 
  const Header = () =>{
-    const [active, setActive] = useState(0);
+    const [userId, setUserId] = useState("");
+    const [userFlag, setUserFlag] = useState(false);
     const [filtered, setFiltered] = useState([]);
     const [isShow, setIsShow] = useState(false);
     const [input, setInput] = useState("");
@@ -19,7 +21,7 @@ import { cartActions } from '../store/restaurantCart-slice';
     let cartQuantity = useSelector((state)=>{
         let count = 0;
         state.cart.itemList.forEach(item => {
-            count += item.quantity;
+            count += +item.quantity;
         });
         return count;
     });
@@ -29,6 +31,34 @@ import { cartActions } from '../store/restaurantCart-slice';
     let userData = useSelector((state)=>state.auth.userData);
     const suggestions  = restaurants;
     const navigate = useNavigate();
+
+    function handleLogin(userObj){
+        axios.get(`http://localhost:8080/users/${userObj.email}`).then(res=>{
+          setUserId(res.data.userId)
+          dispatch(authActions.isLoggedIn(true))
+          dispatch(authActions.userDetails({
+                  firstName : userObj.firstName,
+                  lastName : userObj.lastName,
+                  email : userObj.email,
+                  userId: res.data.userId
+          }))
+          handleCartData(res.data.userId);
+        }).catch(error => {
+          console.error(error);
+        });
+       }
+    
+      function handleCartData(user_id){
+        axios.get(`http://localhost:8080/cartItems/user-cart/${user_id}`).then(res=>{
+            if(!res.data) return;
+            res.data.forEach(item=>{
+              dispatch(cartActions.addToCart(item));
+            })
+        }).catch(error => {
+          console.error(error);
+        });
+      }
+
     function userLogout(){
         const token = localStorage.getItem("JWT");
         dispatch(authActions.isLoggedIn(false));
@@ -51,33 +81,28 @@ import { cartActions } from '../store/restaurantCart-slice';
         console.log('s',restaurant)
         dispatch(restaurantMenuActions.getRestaurantMenu(restaurant));
         localStorage.setItem('res-menu', JSON.stringify(restaurant));
-        setActive(0);
         setFiltered([]);
         setIsShow(false);
         setInput(e.currentTarget.innerText)
-      };
+    };
 
-      function onChange(e){
+    function onChange(e){
         const newFilteredSuggestions = suggestions.filter(suggestion =>suggestion.name.toLowerCase().indexOf(e.currentTarget.value.toLowerCase()) > -1);
-        setActive(0);
         setFiltered(newFilteredSuggestions);
         setIsShow(true);
         setInput(e.currentTarget.value)
-      };
+    };
 
-      function onKeyDown(e){
-        if (e.keyCode === 13) { // enter key
-          setActive(0);
-          setIsShow(false);
-          setInput(filtered[active])
+    useEffect(()=>{
+        console.log('app js')
+        let userObj = JSON.parse(localStorage.getItem('JWT'));
+        if(userObj && !userId && !userFlag){
+          setUserFlag(true);
+          handleLogin(userObj);
         }
-        else if(e.keyCode === 38) { // up arrow
-          return (active === 0) ? null : setActive(active - 1);
-        }
-        else if(e.keyCode === 40) { // down arrow
-          return (active - 1 === filtered.length) ? null : setActive(active + 1);
-        }
-      };
+      })
+
+
 
     return (
         <div className='header'>

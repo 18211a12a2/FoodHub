@@ -56,6 +56,7 @@ function Restaurant(){
 
     function changeQuantity(val,boxItem){
         let q = boxItem.quantity;
+        if(!val && q-1<=0) return;
         q = val ? q+1 : q-1;
         dispatch(cartActions.changeQuantity({
             "quantity":q,

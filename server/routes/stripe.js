@@ -20,7 +20,7 @@ router.post('/create-checkout-session', async (req, res) => {
                     id:item.itemId,
                 }
             },
-            unit_amount:item.price * 100,
+            unit_amount: Math.floor(item.price * 100),
         },
         quantity: item.quantity
       }
@@ -31,7 +31,6 @@ router.post('/create-checkout-session', async (req, res) => {
     success_url: `${process.env.CLIENT_URL}/checkout-success`,
     cancel_url: `${process.env.CLIENT_URL}/cart`,
   });
-  console.log('session url ',session.url)
   res.send({url:session.url});
 });
 

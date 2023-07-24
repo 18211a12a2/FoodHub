@@ -4,9 +4,9 @@ import { getAllCartItems, insertCartItem, removeCartItem, updateCartItem } from 
 
 const router = express.Router();
 
-router.route('/:id').get(getAllCartItems);
+router.route('/user-cart/:id').get(getAllCartItems);
 router.route('/').post(insertCartItem);
 router.route('/:id').patch(updateCartItem);
-router.route('/:id').post(removeCartItem);
+router.route('/delete/:id').delete(removeCartItem);
 
 export default router;

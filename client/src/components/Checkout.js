@@ -1,16 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import '../styles/Checkout.css';
-import { cartActions } from '../store/restaurantCart-slice';
-import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 
 function CheckOut(){
-    let dispatch = useDispatch();
     let checkoutItems = useSelector(state=>state.cart.itemList)
     let userData = useSelector((state)=>state.auth.userData);
-    // function removeItem(id){
-    //     dispatch(cartActions.removeFromCart(id))
-    // }
     async function handlePayments(){
         
         axios.post('http://localhost:8080/stripe/create-checkout-session',{
@@ -28,7 +22,7 @@ function CheckOut(){
     return (
         <div className="checkout">
             <div className='co_container'>
-                <h2>Checkout (2 items)</h2>
+                <h2>Checkout ({checkoutItems.length} {checkoutItems.length > 1 ? "items" : "item"})</h2>
                 <div className='co_delivery co_cmn'>
                     <h3>Delivery Address</h3>
                     <div className='co_address'>

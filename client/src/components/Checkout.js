@@ -44,7 +44,6 @@ function CheckOut(){
                                         </div>
                                         <div className='co_itemRight'>
                                             <img src={item.image} alt='menu_item'></img>
-                                            {/* <div className='coProduct_button'><DeleteIcon/></div> */}
                                         </div>
                                     </div>
                                   ))

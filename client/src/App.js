@@ -8,6 +8,7 @@ import Restaurant from './components/Restaurant';
 import Cart from './components/Cart';
 import CheckOut from './components/Checkout';
 import CheckoutSuccess from './components/CheckoutSuccess';
+import Footer from './components/Footer';
 
 function App() {
   const location = useLocation();
@@ -24,6 +25,7 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/checkout-success' element={<div><CheckoutSuccess/></div>}/>
     </Routes>
+    {!isLoginPage && <Footer />}
     </div>
   );
 }

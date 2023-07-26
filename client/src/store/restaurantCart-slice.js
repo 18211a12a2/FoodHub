@@ -22,10 +22,10 @@ const restaurantCartSlice = createSlice({
                 existingItem.totalPrice +=  newItem.price;
             }else{
                 state.itemList.push({
-                    restaurantId:newItem.restaurantId   ,
+                    restaurantId:newItem.restaurantId,
                     itemId:newItem.itemId,
                     price:newItem.price,
-                    quantity:1,
+                    quantity:newItem.quantity,
                     totalPrice:newItem.price,
                     itemName:newItem.itemName,
                     description:newItem.description,

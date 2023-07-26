@@ -73,13 +73,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-
-.cart_item:hover {
+    height: 150px;
     border-color: rgb(232, 232, 232);
     box-shadow: rgba(28, 28, 28, 0.12) 0px 0.4rem 1.8rem;
     cursor: pointer;
 }
+
+/* .cart_item:hover {
+    
+} */
 
 .cart_itemLeft{}
 

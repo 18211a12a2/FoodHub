@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     itemList : [],
     totalQuantity : 0,
-    dailogData:{}
+    dailogData:{},
+    specialMessage:''
 };
 
 function getExistingItem(state,newItem){
@@ -57,6 +58,9 @@ const restaurantCartSlice = createSlice({
         },
         emptyCart(state){
             state.itemList = [];
+        },
+        getSpecialMessage(state,action){
+            state.specialMessage = action.payload;
         }
     },
 });

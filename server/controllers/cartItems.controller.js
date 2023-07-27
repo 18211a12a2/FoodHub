@@ -5,7 +5,7 @@ const getAllCartItems = async (req,res)=> {
       const userId = req.params.id;
       const userExists = await Cart.findOne({userId});
       if(userExists){
-        res.status(200).send(userExists.items)
+        res.status(200).send({items:userExists.items, specialMessage:userExists.specialMessage})
       }else{
         res.status(200).send(null)
       }
@@ -15,13 +15,13 @@ const getAllCartItems = async (req,res)=> {
 };
 const insertCartItem = async (req,res)=> {
   try {
-      const { userId, cartItems } = req.body;
+      const { userId, cartItems, specialMessage } = req.body;
       let cart = await Cart.findOne({ userId });
       if (cart) {
-        cart = await Cart.updateOne({ userId }, { items: cartItems });
+        cart = await Cart.updateOne({ userId }, { items: cartItems, specialMessage:specialMessage });
         res.status(200).json(cart.items);
       } else {
-        const newCartItems = await Cart.create({ userId, items: cartItems });
+        const newCartItems = await Cart.create({ userId, items: cartItems, specialMessage });
         res.status(200).json(newCartItems);
       }
     } catch (error) {

@@ -23,6 +23,8 @@ function Cart(){
         return state.cart.itemList
     });
     
+    let specialMessage = useSelector(state=>state.cart.specialMessage);
+
     let userData = useSelector((state)=>state.auth.userData);
 
     function removeItem(id){
@@ -37,7 +39,7 @@ function Cart(){
     }
     async function handleCheckout(){
         let userId = userData.userId;
-        axios.post('http://localhost:8080/cartItems', { userId, cartItems })
+        axios.post('http://localhost:8080/cartItems', { userId, cartItems, specialMessage })
         .then(response => {
             console.log('Cart saved successfully:', response.data);
         })
@@ -52,6 +54,15 @@ function Cart(){
                     <div className='cart_header'>
                         {cartItems.length ? (<h2>Your Food Basket</h2>) : (<h2>Your Food Basket is empty</h2>)}
                         
+
+                        {/* Special Message/Instructions Text Box */}
+                        <textarea
+                            className='special_message'
+                            placeholder='Add any special message or instructions for your order here...'
+                            value={specialMessage}
+                        />
+
+
                         <div className='checkout_container'>
                             <p className='cart_price'>Total Price : ${totalPrice.toFixed(2)}</p>
                             <Link to='/checkout'><button onClick={handleCheckout} className='checkout_btn'>Checkout</button></Link>

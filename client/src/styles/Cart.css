@@ -106,3 +106,10 @@
 .cartProduct_button svg{
     color: red;
 }
+
+textarea{
+    border: 2px solid mediumspringgreen;
+    width: 30%;
+    padding: 10px;
+    border-radius: 10px;
+}

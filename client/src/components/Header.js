@@ -51,9 +51,10 @@ import axios from 'axios';
       function handleCartData(user_id){
         axios.get(`http://localhost:8080/cartItems/user-cart/${user_id}`).then(res=>{
             if(!res.data) return;
-            res.data.forEach(item=>{
+            res.data.items.forEach(item=>{
               dispatch(cartActions.addToCart(item));
             })
+            dispatch(cartActions.getSpecialMessage(res.data.specialMessage));
         }).catch(error => {
           console.error(error);
         });

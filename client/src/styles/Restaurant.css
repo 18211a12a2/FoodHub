@@ -144,10 +144,6 @@
     background: linear-gradient(to right, #00416a, #e4e5e6);
 }
 
-.AddToCart >div {
-  
-}
-
 .AddToCart:hover{
     background: linear-gradient(to right, #e4e5e6, #00416a);
 }

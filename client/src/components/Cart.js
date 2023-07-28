@@ -4,14 +4,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { cartActions } from '../store/restaurantCart-slice';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../axios.js';
 
 function Cart(){
     let totalPrice = 0;
     const dispatch = useDispatch();
-
+    const [isAuthenticated, setAuthentication] = useState(false);
     useEffect(()=>{
         window.scroll(0,0);
+        setAuthentication(!!userData.userId);
     })
 
     let cartItems = useSelector((state)=>{
@@ -39,7 +40,7 @@ function Cart(){
     }
     async function handleCheckout(){
         let userId = userData.userId;
-        axios.post('http://localhost:8080/cartItems', { userId, cartItems, specialMessage })
+        axios.post('/cartItems', { userId, cartItems, specialMessage })
         .then(response => {
             console.log('Cart saved successfully:', response.data);
         })
@@ -48,24 +49,29 @@ function Cart(){
         })
     }
 
+    function handleChange(e){
+        dispatch(cartActions.getSpecialMessage(e.target.value));
+      };
+
     return (
         <div className='cart'>
                 <div className='cart_container'>
                     <div className='cart_header'>
                         {cartItems.length ? (<h2>Your Food Basket</h2>) : (<h2>Your Food Basket is empty</h2>)}
-                        
-
                         {/* Special Message/Instructions Text Box */}
                         <textarea
                             className='special_message'
                             placeholder='Add any special message or instructions for your order here...'
                             value={specialMessage}
+                            onChange={handleChange}
                         />
-
-
                         <div className='checkout_container'>
                             <p className='cart_price'>Total Price : ${totalPrice.toFixed(2)}</p>
-                            <Link to='/checkout'><button onClick={handleCheckout} className='checkout_btn'>Checkout</button></Link>
+                            {isAuthenticated ? (
+                                <Link to='/checkout'><button onClick={handleCheckout} className='checkout_btn'>Checkout</button></Link>
+                            ) : (
+                                <Link to='/login'><button onClick={handleCheckout} className='checkout_btn'>Login to Continue</button></Link>
+                            )}
                         </div>
                     </div>
                     <div className='cart_cards'>

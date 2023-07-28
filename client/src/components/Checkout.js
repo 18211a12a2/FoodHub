@@ -1,13 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import '../styles/Checkout.css';
-import axios from 'axios';
+import axios from '../axios.js';
 
 function CheckOut(){
     let checkoutItems = useSelector(state=>state.cart.itemList)
     let userData = useSelector((state)=>state.auth.userData);
     async function handlePayments(){
-        
-        axios.post('http://localhost:8080/stripe/create-checkout-session',{
+        axios.post('/stripe/create-checkout-session',{
             cartItems:checkoutItems,
             userId : userData.userId,
         }).then(res=>{

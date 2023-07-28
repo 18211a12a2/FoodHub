@@ -58,6 +58,9 @@ const restaurantCartSlice = createSlice({
         },
         emptyCart(state){
             state.itemList = [];
+            state.specialMessage = "";
+            state.totalQuantity = 0;
+            state.dailogData = {};
         },
         getSpecialMessage(state,action){
             state.specialMessage = action.payload;

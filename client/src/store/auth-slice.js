@@ -8,7 +8,7 @@ const authSlice = createSlice({
             firstName : "Guest",
             lastName : "",
             email : '',
-            id:''
+            userId:''
         }
      },
     reducers : {
@@ -20,9 +20,6 @@ const authSlice = createSlice({
         },
         userDetails(state,action){
             state.userData = action.payload;
-        },
-        JWTToken(state,action){
-            
         }
     }
 });

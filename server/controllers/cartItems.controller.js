@@ -35,7 +35,6 @@ const removeCartItem = async (req,res)=> {
     const userExists = await Cart.findOne({userId});
     if(userExists){
       const result = await Cart.deleteMany({userId});
-      // res.status(200).send(userExists.items)
       res.status(200).json({ message: 'All cart items have been deleted successfully.', cartItems : userExists });
     }
   } catch (err) {

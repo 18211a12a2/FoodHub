@@ -3,9 +3,7 @@ import User from '../mongodb/models/user.js';
 const getUser = async (req,res)=> {
     try{
         const {email} = req.params;
-      //  console.log("email in user: ",req.params,email)
         const userExists = await User.findOne({email});
-      //  console.log("1 uaer : ",userExists)
         if(userExists){
          res.status(200).send({userId : userExists._id})
         }

@@ -1,6 +1,6 @@
 import '../styles/Home.css';
 import restaurantsData from '../utils/restaurants'
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Restaurants from './Restaurants';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';

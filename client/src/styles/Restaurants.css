@@ -26,15 +26,13 @@
     align-items: center;
     justify-content: space-between;
 }
-.res_distance{}
-.res_deliveryTime{}
-.res_deliveryFee{}
+
 .res_footer{
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.res_type{}
+
 .res_rating{
     display: flex;
     align-items: center;

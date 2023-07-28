@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import restaurants from '../utils/restaurants';
 import { restaurantMenuActions } from '../store/restaurantmenu-slice';
 import { cartActions } from '../store/restaurantCart-slice';
-import axios from 'axios';
+import axios from '../axios.js';
 
  const Header = () =>{
     const [userId, setUserId] = useState("");
@@ -33,7 +33,7 @@ import axios from 'axios';
     const navigate = useNavigate();
 
     function handleLogin(userObj){
-        axios.get(`http://localhost:8080/users/${userObj.email}`).then(res=>{
+        axios.get(`/users/${userObj.email}`).then(res=>{
           setUserId(res.data.userId)
           dispatch(authActions.isLoggedIn(true))
           dispatch(authActions.userDetails({
@@ -49,7 +49,7 @@ import axios from 'axios';
        }
     
       function handleCartData(user_id){
-        axios.get(`http://localhost:8080/cartItems/user-cart/${user_id}`).then(res=>{
+        axios.get(`/cartItems/user-cart/${user_id}`).then(res=>{
             if(!res.data) return;
             res.data.items.forEach(item=>{
               dispatch(cartActions.addToCart(item));
@@ -79,7 +79,6 @@ import axios from 'axios';
     }
 
     function onSelectSuggestion(e,restaurant){
-        console.log('s',restaurant)
         dispatch(restaurantMenuActions.getRestaurantMenu(restaurant));
         localStorage.setItem('res-menu', JSON.stringify(restaurant));
         setFiltered([]);

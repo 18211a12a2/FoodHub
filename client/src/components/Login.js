@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { authActions } from "../store/auth-slice";
 import { Link, Navigate } from 'react-router-dom';
 import '../styles/Login.css';
-import axios from 'axios';
+import axios from '../axios.js';
 
 
 function Login(){
@@ -32,30 +32,23 @@ function Login(){
     }
 
     async function handleCallBackResponse(res){
-        console.log("Encoded JWT ID token : ",res.credential)
         let userObj = res.credential ? jwt_decode(res.credential) : null;
-        console.log(userObj);
         if(userObj){
-            const response = await fetch("http://localhost:8080/users",{
-                method:'POST',
-                headers:{'Content-Type':'application/json'},
-                body:JSON.stringify({
-                    firstName : userObj.given_name,
-                    lastName : userObj.family_name,
-                    email : userObj.email,
-                })
-            })
-            const data = await response.json();
-            console.log("user reso ",data)
-            if(data){
+            axios.post('/users',{
+                firstName : userObj.given_name,
+                lastName : userObj.family_name,
+                email : userObj.email,
+            }).then(res=>{
                 let userPayLoad = {
                     firstName : userObj.given_name,
                     lastName : userObj.family_name,
                     email : userObj.email,
-                    userId:data._id
+                    userId: res._id
                 }
                 handleUserData(userPayLoad);
-            }
+            }).catch(err=>{
+                console.log(err);
+            })
         }
     }
 
@@ -83,7 +76,7 @@ function Login(){
     }
 
     function postUserdata(payload,type){
-        axios.post(`http://localhost:8080/auth/${type}`, payload)
+        axios.post(`/auth/${type}`, payload)
         .then(response => {
             if(type==='register'){
                 console.log('Registration done successfully', response.data);

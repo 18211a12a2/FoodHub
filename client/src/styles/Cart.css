@@ -79,12 +79,6 @@
     cursor: pointer;
 }
 
-/* .cart_item:hover {
-    
-} */
-
-.cart_itemLeft{}
-
 .cart_itemRight{
     display: flex;
     align-items: end;
@@ -96,8 +90,6 @@
     border-radius: 50%;
     margin-bottom: 6px;
 }
-
-.cartProduct_quantity{}
 
 .cartProduct_quantityInput{
     width: 15%;

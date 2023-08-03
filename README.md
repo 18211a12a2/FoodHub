@@ -9,7 +9,7 @@
     # npm install
     # npm start
 
-# 3. Navigate to client and then run the command:
+# 3. Navigate to server and then run the command:
 
     # npm install
     # npm start

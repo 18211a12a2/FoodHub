@@ -67,3 +67,14 @@
     align-items: center;
     cursor: pointer;
 }
+
+.home_banner_img > img{
+    height: 10%;
+    width: 100%;
+}
+
+@media only screen and (max-width: 1000px) {
+    .home_banner_text > h2 {
+        font-size: 28px;
+    }
+}

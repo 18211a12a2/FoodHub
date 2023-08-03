@@ -30,7 +30,7 @@ function Home(){
                 <div className='home_banner_text'>
                     <h2>Good Food, Good Life</h2> 
                 </div>
-                <div className='home_banner_img'><img width="501" height="300" alt='food' src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1002,h_600/v1678428358/portal/m/seo_web/dweb_header"></img></div>
+                <div className='home_banner_img'><img alt='food' src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1002,h_600/v1678428358/portal/m/seo_web/dweb_header"></img></div>
             </div>
             <div className='home_filter'>
                 <div className='home_dropdown'>

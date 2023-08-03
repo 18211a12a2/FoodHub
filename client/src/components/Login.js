@@ -5,6 +5,7 @@ import { authActions } from "../store/auth-slice";
 import { Link, Navigate } from 'react-router-dom';
 import '../styles/Login.css';
 import axios from '../axios.js';
+import LoadingIndicator from 'react-loading-indicator'
 
 
 function Login(){
@@ -16,6 +17,7 @@ function Login(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [isLoadingIncON, setLoading] = useState(false);
     let dispatch = useDispatch();
 
     function handleUserData(userObj,id){
@@ -32,6 +34,7 @@ function Login(){
     }
 
     async function handleCallBackResponse(res){
+        setLoading(true);
         let userObj = res.credential ? jwt_decode(res.credential) : null;
         if(userObj){
             axios.post('/users',{
@@ -39,6 +42,7 @@ function Login(){
                 lastName : userObj.family_name,
                 email : userObj.email,
             }).then(res=>{
+                setLoading(false);
                 let userPayLoad = {
                     firstName : userObj.given_name,
                     lastName : userObj.family_name,
@@ -59,6 +63,7 @@ function Login(){
             email,
             password
         }
+        setLoading(true);
         postUserdata(loginData,"login")
     }
 
@@ -78,6 +83,7 @@ function Login(){
     function postUserdata(payload,type){
         axios.post(`/auth/${type}`, payload)
         .then(response => {
+            setLoading(false);
             if(type==='register'){
                 console.log('Registration done successfully', response.data);
                 alert("Registration done successfully");
@@ -148,6 +154,9 @@ function Login(){
                                     <input className="m h" value={email} onChange={(e) => setEmail(e.target.value)} type="email" required placeholder="email"></input>
                                     <input className="m h" value={password} onChange={(e) => setPassword(e.target.value)} type="password" required placeholder="password"></input>
                                     <button className="login_btn btn_h" type="submit">Login</button>
+                                    {
+                                        isLoadingIncON && <LoadingIndicator />
+                                    }
                                     <p className="have_an_acc">Don't have an account? <span onClick={goToSignup}>Signup</span></p>
                                 </form>
                              </div>

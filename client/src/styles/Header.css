@@ -1,137 +1,151 @@
 .header{
-    width: 100%;
-    max-width: 100%;
-    border-bottom: 1px solid rgb(226, 226, 231);
-    background-color: rgb(255, 255, 255);
-    position: sticky;
-    z-index: 999;
-    top: 0;
+  width: 100%;
+  max-width: 100%;
+  border-bottom: 1px solid rgb(226, 226, 231);
+  background-color: rgb(255, 255, 255);
+  position: sticky;
+  z-index: 999;
+  top: 0;
 }
 
 .header_container{
-    width: 80%;
-    height:64px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-    margin: 0 auto;
+  width: 80%;
+  height:64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  margin: 0 auto;
 }
 
 .header_autoSuggest{
-    width: 50%;
+  width: 50%;
 }
 
 .header_search{
-    background-color: unset;
-    box-shadow: unset;
-    overflow: hidden;
-    transition: transform 0.1s ease-in 0s;
-    border: 0px;
-    appearance: none;
-    display: flex;
-    align-items: center;
-    /* position: relative; */
-    top: 5px;
-    position: fixed;
-    width: 40%;
+  background-color: unset;
+  box-shadow: unset;
+  overflow: hidden;
+  transition: transform 0.1s ease-in 0s;
+  border: 0px;
+  appearance: none;
+  display: flex;
+  align-items: center;
+  /* position: relative; */
+  top: 5px;
+  position: fixed;
+  width: 40%;
 }
 
 .header_search input{
-    width: 100%;
-    outline: none;
-    background-color: rgb(247, 247, 247);
-    border: 0;
-    height: 50px;
-    padding: 2px 20px;
-    border-radius: 50px;
-    font-size: 16px;
+  width: 100%;
+  outline: none;
+  background-color: rgb(247, 247, 247);
+  border: 0;
+  height: 50px;
+  padding: 2px 20px;
+  border-radius: 50px;
+  font-size: 16px;
 }
 
 .header_search input:hover{
-    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
-    border-color: rgb(232, 232, 232);
-    box-sizing: border-box;
+  box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+  border-color: rgb(232, 232, 232);
+  box-sizing: border-box;
 }
 
 .header_search svg{
-    position: absolute;
-    right : 20px;
+  position: absolute;
+  right : 20px;
 }
 
 .header_sidemenu{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 30%;
 }
 
 .header_user{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 10px;
 }
 
 .header_cart{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 55px;
-    height: 30px;
-    background: linear-gradient(to right, #ffc371, #ff5f6d);
-    border-radius: 20px;
-    color: white;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 55px;
+  height: 30px;
+  background: linear-gradient(to right, #ffc371, #ff5f6d);
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
 }
 
 .header_cart:hover{
-    padding: 2px;
+  padding: 2px;
 }
 
 .header_login{
-    cursor: pointer;
+  cursor: pointer;
 }
 
 input {
-    border: 1px solid #999;
-    padding: 8px;
-    width: 300px;
-  }
-  .no-autocomplete {
-    color: #999;
-    padding: 8px;
-  }
-  .autocomplete {
-    border: 1px solid #999;
-    border-top-width: 0;
-    background-color: #f5f5f5;
-    position: fixed;
-    top: 60px;
-    width: 40%;
-  }
+  border: 1px solid #999;
+  padding: 8px;
+  width: 300px;
+}
+.no-autocomplete {
+  color: #999;
+  padding: 8px;
+}
+.autocomplete {
+  border: 1px solid #999;
+  border-top-width: 0;
+  background-color: #f5f5f5;
+  position: fixed;
+  top: 60px;
+  width: 40%;
+}
 
-  .ac_ul{
-    padding: 0;
-    border-top-width: 0;
-    list-style: none;
-    margin-top: 0;
-    max-height: 154px;
-    overflow-y: auto;
-    padding-left: 0;
-  }
+.ac_ul{
+  padding: 0;
+  border-top-width: 0;
+  list-style: none;
+  margin-top: 0;
+  max-height: 154px;
+  overflow-y: auto;
+  padding-left: 0;
+}
 
-  .autocomplete li {
-    padding: 8px 8px 8px 30px;
-  }
-  .autocomplete > .active,
-  .autocomplete li:hover {
-    background-color: darkgray;
-    cursor: pointer;
-    font-weight: 700;
-  }
-  .ac_li {
-    border-bottom: 1px solid #999;
-    color: black;
-  }
+.autocomplete li {
+  padding: 8px 8px 8px 30px;
+}
+.autocomplete > .active,
+.autocomplete li:hover {
+  background-color: darkgray;
+  cursor: pointer;
+  font-weight: 700;
+}
+.ac_li {
+  border-bottom: 1px solid #999;
+  color: black;
+}
+
+
+@media only screen and (max-width: 1000px) {
+
+.header_search{
+  position: unset;
+  width: 90%;
+}
+
+.header_search svg {
+  position: unset;
+}
+
+}

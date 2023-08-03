@@ -49,7 +49,6 @@
 }
 
 .login_right_main{
-    width: 80%;
     height: 450px;
     margin: 0 auto;
     align-items: center;
@@ -61,6 +60,7 @@
     cursor: pointer;
     border-radius: 10px;
     background: #ecf0f3;
+    width: 90%;
 }
 
 form{
@@ -83,8 +83,8 @@ form{
 
 .h{
     height: 30px;
-    height: 30px;
     box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+    -webkit-box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
     border: none;
     outline: none;
     background: none;
@@ -92,6 +92,7 @@ form{
     font-size: 16px;
     font-weight: 600;
     padding-left: 20px;
+    width: 100%
 }
 
 .btn_h{
@@ -132,3 +133,19 @@ input::placeholder{
 .signup_page{
     height: 80%;
 }
+
+
+@media only screen and (max-width: 1000px) {
+    .login_left {
+        width: 20% !important;
+        display: none;
+    }
+
+    .login_right {
+        width: 100% !important;
+    }
+
+    .h{
+        width: 100% !important;
+    }
+  }

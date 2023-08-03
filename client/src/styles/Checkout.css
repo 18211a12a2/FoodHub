@@ -16,6 +16,17 @@
     border-bottom: 0.5px solid #d3d3d3;
 }
 
+.co_cmn_spcl{
+    display: flex;
+    align-items: start;
+    padding: 20px;
+    border-bottom: 0.5px solid #d3d3d3;
+}
+
+.co_cmn_spcl > h3{
+    margin-right: 150px;
+}
+
 .co_cmn > h3{
     width: 30%;
 }

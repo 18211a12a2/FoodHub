@@ -5,6 +5,7 @@ import axios from '../axios.js';
 function CheckOut(){
     let checkoutItems = useSelector(state=>state.cart.itemList)
     let userData = useSelector((state)=>state.auth.userData);
+    let specialMessage = useSelector((state)=>state.cart.specialMessage);
     async function handlePayments(){
         axios.post('/stripe/create-checkout-session',{
             cartItems:checkoutItems,
@@ -48,6 +49,10 @@ function CheckOut(){
                                   ))
                             }
                     </div>
+                </div>
+                <div className='co_special_msg co_cmn_spcl'>
+                    <h3>Special Message</h3>
+                    <p>{specialMessage}</p>
                 </div>
                 <div className='co_payment co_cmn'>
                     <h3>Payment method</h3>
